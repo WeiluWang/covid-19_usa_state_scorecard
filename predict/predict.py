@@ -19,16 +19,16 @@ if len(sys.argv) > 1:
 else:
     cut_ratio = 0.3
 
-if not (0 < cut_ratio and cut_ratio < ratio and ratio < 1.0):
+if not (0 <= cut_ratio and cut_ratio < ratio and ratio < 1.0):
     cut_ratio, ratio = 0.3, 0.8
 
-print(cut_ratio, ratio)
+print({"Abandoned ratio: ":cut_ratio, "Training set ratio":(ratio-cut_ratio), "Testing set ratio":1.0-ratio})
 
-f = open('data2.csv')
+f = open('C:\\Users\\ED\\Documents\\covid\\predict\\data2.csv')
 title = f.readline().rstrip().split(',')
 f.close()
 
-data = np.loadtxt('data2.csv', delimiter = ",", skiprows = 1)
+data = np.loadtxt('C:\\Users\\ED\\Documents\\covid\\predict\\data2.csv', delimiter = ",", skiprows = 1)
 # print(title)
 
 
@@ -79,7 +79,31 @@ def build_dates(startdate, days=90):
 
 
 # In[72]:
+def info(clf):
 
+    coef_list = clf.coef_[0]
+
+    print(features)
+    print(coef_list)
+
+    coefs = {}
+    for i,f in enumerate(features):
+        coefs[f] = coef_list[i]
+
+    print(coefs)
+
+
+    print("\nInterception: "+str(clf.intercept_))
+
+    print("\nAccuracy: "+str(clf.score(x_test, y_label_test)))
+
+    prediction = clf.predict(np.array(x_test))
+
+    print("\nactual\tpredicted")
+    print(np.sum(y_label_test==1), "\t", np.sum(prediction==1))
+    print(np.sum(y_label_test==2), "\t", np.sum(prediction==2))
+
+    return prediction
 
 def plot(prediction, days):
     predict_list1 = [np.sum(prediction[i*49:i*49+49]==1) for i in range(days)]
@@ -151,23 +175,13 @@ y_label_train, y_label_test = Y[cut*49:split*49], Y[split*49:]
 
 from sklearn.svm import LinearSVC
 
-clf = LinearSVC(C=1.0, class_weight='balanced', random_state=1)         .fit(x_train, y_label_train)
+clf = LinearSVC(C=1.0, class_weight='balanced', random_state=1, max_iter=10000)         .fit(x_train, y_label_train)
 
 
 print('Linear SVM\n')
-print(features)
-print(clf.coef_[0])
 
 
-print("\nAccuracy: ",clf.score(x_test, y_label_test))
-
-
-prediction = clf.predict(x_test)
-
-print("\nactual\tpredicted")
-print(np.sum(y_label_test==1), "\t", np.sum(prediction==1))
-print(np.sum(y_label_test==2), "\t", np.sum(prediction==2))
-
+prediction = info(clf)
     
 plot(prediction, 90-split)
 
@@ -178,23 +192,14 @@ plot(prediction, 90-split)
 from sklearn.datasets import load_iris
 from sklearn.linear_model import LogisticRegression
 
-clf = LogisticRegression(C=1.0,class_weight='balanced',random_state=7).fit(x_train, y_label_train)
+clf = LogisticRegression(C=1.0,class_weight='balanced',random_state=7, max_iter=10000).fit(x_train, y_label_train)
 
 print('Logistic Regression\n')
-print(features)
-print(clf.coef_[0])
 
-print("\nAccuracy: ",clf.score(x_test, y_label_test))
-
-
-prediction = clf.predict(np.array(x_test))
-print("\nactual\tpredicted")
-print(np.sum(y_label_test==1), "\t", np.sum(prediction==1))
-print(np.sum(y_label_test==2), "\t", np.sum(prediction==2))
+prediction = info(clf)
 
     
 plot(prediction, 90-split)
-plt.show(block=True)
 
 # In[ ]:
 

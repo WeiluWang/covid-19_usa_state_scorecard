@@ -56,7 +56,7 @@ WOE_air_avg = spark.read\
 
 def count_credit_score(Data, Beta_0, Beta_1):
     credit_score = 0
-    credit_score = ((float(Data)*Beta_1)+Beta_0) * 28.85 - 12.87
+    credit_score = ((float(Data)*Beta_1)+Beta_0) * 28.85 + 487.15
     
     return credit_score
 
@@ -92,13 +92,13 @@ for i in range(0, 3):
 '''
 
 for i in range(0, 3):
-    credit_score_ICU.append(count_credit_score(WOE_ICU.collect()[i][8], 1, -0.17081894))
-    credit_score_trends_mask.append(count_credit_score(WOE_trends_mask.collect()[i][8], 1, 0.33744035))
-    credit_score_trends_face_mask.append(count_credit_score(WOE_trends_face_mask.collect()[i][8], 1, 0.0460197))
-    credit_score_trends_covid_19.append(count_credit_score(WOE_trends_covid_19.collect()[i][8], 1, 0.0460197))
-    credit_score_trends_coronavirus.append(count_credit_score(WOE_trends_coronavirus.collect()[i][8], 1, 0.35719526))
-    credit_score_trends_sanitizer.append(count_credit_score(WOE_trends_sanitizer.collect()[i][8], 1, 0.00431396))
-    credit_score_air_avg.append(count_credit_score(WOE_air_avg.collect()[i][8], 1, 0.21713655))
+    credit_score_ICU.append(count_credit_score(WOE_ICU.collect()[i][8], -0.01161306, -0.0019276020458007983))
+    credit_score_trends_mask.append(count_credit_score(WOE_trends_mask.collect()[i][8], -0.01161306,  0.12154219147248996))
+    credit_score_trends_face_mask.append(count_credit_score(WOE_trends_face_mask.collect()[i][8], -0.01161306, -0.7607582033915038))
+    credit_score_trends_covid_19.append(count_credit_score(WOE_trends_covid_19.collect()[i][8],-0.01161306, -0.18961628153937474))
+    credit_score_trends_coronavirus.append(count_credit_score(WOE_trends_coronavirus.collect()[i][8], -0.01161306, -0.06276454502412158))
+    credit_score_trends_sanitizer.append(count_credit_score(WOE_trends_sanitizer.collect()[i][8], -0.01161306, 0.036090109535216006))
+    credit_score_air_avg.append(count_credit_score(WOE_air_avg.collect()[i][8], -0.01161306,  -0.03141952587420972))
 
 
 
@@ -196,8 +196,8 @@ credit_score_table = credit_score_table.select("Characteristic_Name", F.bround("
 
 credit_score_table.show(30, truncate = False)
 
-
+'''
 credit_score_table.coalesce(1)\
                   .write\
                   .option("header", "true")\
-                  .csv("C:/Users/ED/Documents/covid/generate_creditscorecard/credit_score_table.csv")
+                  .csv("C:/Users/ED/Documents/covid/generate_creditscorecard/credit_score_table.csv")'''
