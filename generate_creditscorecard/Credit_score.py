@@ -56,7 +56,7 @@ WOE_air_avg = spark.read\
 
 def count_credit_score(Data, Beta_0, Beta_1):
     credit_score = 0
-    credit_score = ((float(Data)*Beta_1)+Beta_0) * 28.85 + 487.15
+    credit_score = ((float(Data)*Beta_1)+Beta_0) * 115.41 + 148.5
     
     return credit_score
 

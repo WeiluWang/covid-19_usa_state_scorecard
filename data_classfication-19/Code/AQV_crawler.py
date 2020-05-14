@@ -139,15 +139,15 @@ print("len(list_state) = ", len(list_state))
 
 
 
-with open('C:/Users/ED/Desktop/covid/COVID-19/Date/list_state.csv', 'w', newline='') as csvfile:
+with open('C:/Users/ED/Documents/covid/data_classfication-19/Code/list_state.csv', 'w', newline='') as csvfile:
     writer  = csv.writer(csvfile)
     writer.writerow(list_state)
 
-with open('C:/Users/ED/Desktop/covid/COVID-19/Date/list_date.csv', 'w', newline='') as csvfile:
+with open('C:/Users/ED/Documents/covid/data_classfication-19/Code/list_date.csv', 'w', newline='') as csvfile:
     writer  = csv.writer(csvfile)
     writer.writerow(list_date)
 
-with open('C:/Users/ED/Desktop/covid/COVID-19/Date/la.csv', 'w', newline='') as csvfile:
+with open('C:/Users/ED/Documents/covid/data_classfication-19/Code/la.csv', 'w', newline='') as csvfile:
     writer  = csv.writer(csvfile)
     writer.writerow(la)
 

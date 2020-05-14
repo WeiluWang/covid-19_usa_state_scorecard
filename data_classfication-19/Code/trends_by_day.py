@@ -152,7 +152,7 @@ class TrendsByDay:
         result_df.reset_index()
         return result_df
 
-    def trends_by_region_and_day(self, inc_low_vol=False, inc_geo_code=True, save_path='trends_by_day.csv'):
+    def trends_by_region_and_day(self, inc_low_vol=False, inc_geo_code=True, save_path='trends_by_day123.csv'):
         with open(save_path, 'w') as fp:
             fp.write('date,geoCode')
             for kw in self.kw_list:
@@ -191,7 +191,7 @@ if __name__ == "__main__":
     if len(sys.argv) > 3:
         save_path = sys.argv[3]
 
-    kw_fn = 'keywords'          # filename of keywords list
+    kw_fn = 'C:\\Users\\ED\\Documents\\covid\\data_classfication-19\\Code\\keywords'          # filename of keywords list
     # kw_list = ['mask']
     kw_list = []
     read_kw_from_file(kw_fn, kw_list)
