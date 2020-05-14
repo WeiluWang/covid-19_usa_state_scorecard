@@ -62,3 +62,7 @@ classify_data_level.py -> output level of each data in each factors and WOE of e
 Factor_IV.py ->output IV value of each factors
 
 predict.py -> output coeffiecient and interception of SVM and logistic regression 
+
+raw_square_cube.py -> output coeffiecient and interception of SVM and logistic regression  from data join with cube(data) and square(data)
+
+pytorch.py -> different training model we didn't use at last
